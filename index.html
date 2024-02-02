@@ -1,23 +1,58 @@
 <!DOCTYPE html>
-<style>
-  /* netnet default bg */
-  body {
-    margin: 0;
-    background-image: linear-gradient(#515199a8 2px, transparent 1px),
-      linear-gradient(90deg, #515199a8 2px, transparent 1px);
-    background-size: 50px 50px;
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-  }
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Words Grid Generator</title>
+    <style>
+        /* Default grid layout styles */
+        #grid-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* Adjust the number of columns as needed */
+            gap: 5px; /* Adjust the gap between cells */
+        }
 
-  body::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(0deg, #c76ebca8, #515199a8);
-  }
-</style>
-    
+        /* Style for the words */
+        .grid-word {
+            border: 1px solid #000;
+            padding: 1px;
+            margin: 1px;
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 600px) {
+            #grid-container {
+                grid-template-columns: repeat(3, 1fr); /* Adjust for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    function createGrid(text) {
+        const words = text.split(/\s+/);
+
+        // Display words in a grid
+        const gridContainer = document.createElement("div");
+        gridContainer.id = "grid-container";
+
+        words.forEach(word => {
+            const wordElement = document.createElement("div");
+            wordElement.classList.add("grid-word");
+            wordElement.innerHTML = word;
+            gridContainer.appendChild(wordElement);
+        });
+
+        document.body.appendChild(gridContainer);
+    }
+
+    // Example usage
+    const inputText = "This is an example sentence for creating a responsive grid of randomly chosen words.";
+
+    createGrid(inputText);
+</script>
+
+</body>
+</html>
+
